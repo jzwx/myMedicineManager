@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<constant name="struts.i18n.encoding" value="GBK"></constant>
+	<package name="com.my.action" extends="struts-default" namespace="/">
+		<action name="user" class="com.my.action.UserAction">
+			<result name="manager">/manager.jsp</result>
+			<result name="normalmanager">/normalmanager.jsp</result>
+			<result name="login">/Login.jsp</result>
+			<result name="usershow">/usershow.jsp</result>
+			<result name="useradd">/useradd.jsp</result>
+			<result name="useraddsuccess">/useraddsuccess.jsp</result>
+			<result name="userdeletesuccess">/userdeletesuccess.jsp</result>
+			<result name="prepassword">/userupdatepassword.jsp</result>
+			<result name="updatepasswordsuccess">/updatepasswordsuccess.jsp</result>
+			<result name="userpreupdate">/userpreupdate.jsp</result>
+			<result name="userupdatesuccess">/userupdatesuccess.jsp</result>
+			<result name="personinfo">/personinfo.jsp</result>
+		</action>
+		<action name="drugclass" class="com.my.action.DrugclassAction">
+			<result name="drugclassshow">/drugclassshow.jsp</result>
+			<result name="drugclassaddsuccess">/drugclassaddsuccess.jsp</result>
+			<result name="drugclassadd">/drugclassadd.jsp</result>
+			<result name="drugclasspreupdate">/drugclasspreupdate.jsp</result>
+			<result name="drugclassupdatesuccess">/drugclassupdatesuccess.jsp</result>
+			<result name="drugclassdeletesuccess">/drugclassdeletesuccess.jsp</result>
+		</action>
+		<action name="pharmaceutical" class="com.my.action.PharmaceuticalAction">
+			<result name="pharmaceuticalshow">/pharmaceuticalshow.jsp</result>
+			<result name="pharmaceuticaladdsuccess">/pharmaceuticaladdsuccess.jsp</result>
+			<result name="pharmaceuticaladd">/pharmaceuticaladd.jsp</result>
+			<result name="pharmaceuticalpreupdate">/pharmaceuticalpreupdate.jsp</result>
+			<result name="pharmaceuticalupdatesuccess">/pharmaceuticalupdatesuccess.jsp</result>
+			<result name="pharmaceuticaldeletesuccess">/pharmaceuticaldeletesuccess.jsp</result>
+		</action>
+		<action name="supplymanager" class="com.my.action.SupplymanagerAction">
+			<result name="supplymanagershow">/supplymanagershow.jsp</result>
+			<result name="supplymanageradd">/supplymanageradd.jsp</result>
+			<result name="supplymanageraddsuccess">/supplymanageraddsuccess.jsp</result>
+			<result name="supplymanagerpreupdate">/supplymanagerpreupdate.jsp</result>
+			<result name="supplymanagerupdatesuccess">/supplymanagerupdatesuccess.jsp</result>
+			<result name="supplymanagerdeletesuccess">/supplymanagerdeletesuccess.jsp</result>
+			<result name="supplymanagerview">/supplymanagerview.jsp</result>
+		</action>
+		<action name="druginfo" class="com.my.action.DruginfoAction">
+			<result name="druginfoshow">/druginfoshow.jsp</result>
+			<result name="druginfoadd">/druginfoadd.jsp</result>
+			<result name="druginfoaddsuccess">/druginfoaddsuccess.jsp</result>
+			<result name="druginfopreupdate">/druginfopreupdate.jsp</result>
+			<result name="druginfoupdatesuccess">/druginfoupdatesuccess.jsp</result>
+			<result name="druginfodeletesuccess">/druginfodeletesuccess.jsp</result>
+			<result name="finddrug">/finddrug.jsp</result>
+		</action>
+		<action name="drugstorage" class="com.my.action.DrugstorageAction">
+			<result name="drugstorageshow">/drugstorageshow.jsp</result>
+			<result name="drugstorageadd">/drugstorageadd.jsp</result>
+			<result name="drugstorageaddsuccess">/drugstorageaddsuccess.jsp</result>
+			<result name="drugstoragedeletesuccess">/drugstoragedeletesuccess.jsp</result>
+			<result name="findstorage">/findstorage.jsp</result>
+			<result name="drugstoragecheckshow">/drugstoragecheckshow.jsp</result>
+			<result name="finddateshow">/finddateshow.jsp</result>
+		</action>
+		<action name="drugdelivery" class="com.my.action.DrugdeliveryAction">
+			<result name="drugdeliveryshow">/drugdeliveryshow.jsp</result>
+			<result name="drugdeliveryadd">/drugdeliveryadd.jsp</result>
+			<result name="drugdeliveryaddsuccess">/drugdeliveryaddsuccess.jsp</result>
+			<result name="finddelivery">/finddelivery.jsp</result>
+			<result name="drugdeliverydeletesuccess">/drugdeliverydeletesuccess.jsp</result>
+			<result name="drugdeliverycheckshow">/drugdeliverycheckshow.jsp</result>
+		</action>
+		<action name="druginventory" class="com.my.action.DruginventoryAction">
+			<result name="druginventoryshow">/druginventoryshow.jsp</result>
+			<result name="callpoliceshow">/callpoliceshow.jsp</result>
+		</action>
+		<action name="page" class="com.my.action.PageAction">
+			<result name="drugclassshow">/drugclassshow.jsp</result>
+			<result name="druginfoshow">/druginfoshow.jsp</result>
+			<result name="pharmaceuticalshow">/pharmaceuticalshow.jsp</result>
+			<result name="supplymanagershow">/supplymanagershow.jsp</result>
+			<result name="usershow">/usershow.jsp</result>
+			<result name="drugstorageshow">/drugstorageshow.jsp</result>
+			<result name="drugdeliveryshow">/drugdeliveryshow.jsp</result>
+			<result name="drugstoragecheckshow">/drugstoragecheckshow.jsp</result>
+			<result name="drugdeliverycheckshow">/drugdeliverycheckshow.jsp</result>
+			<result name="druginventoryshow">/druginventoryshow.jsp</result>
+			<result name="callpoliceshow">/callpoliceshow.jsp</result>
+			<result name="finddateshow">/finddateshow.jsp</result>
+		</action>
+	</package>
+</struts>    
