@@ -1,0 +1,2 @@
+# myMedicineManager
+Struts2+hibernate框架开发的医药管理系统
