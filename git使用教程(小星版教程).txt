@@ -1,0 +1,21 @@
+http://blog.csdn.net/free_wind22/article/details/50967723
+1.设置用户名
+git config --global user.name "jzwx"
+2.设置用户邮箱
+git config --global user.email "2058631403@qq.com"
+3.查看用户配置信息
+git config --list
+4.生成与github库之间连接的秘钥  id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。
+ssh-keygen -t rsa -C "2058631403@qq.com"
+5.进入到本地做仓库的文件夹下初始化仓库
+git init
+6.把本地仓库和远程仓库关联起来。如果不执行这个命令的话，每次 push 的时候都需要指定远程服务器的地址
+git remote add origin git@github.com:jzwx/mySSH.git
+7.git pull git@github.com:jzwx/mySSH.git  从服务器仓库中把最新的文件提取下来
+8.git add .
+9.git commit -m "LIS-0001_wangxin"
+10.git push git@github.com:jzwx/mySSH.git
+11.git status
+12.git branch -a 看服务器有多少条流
+13.git fetch 刷新流
+14.git checkout 切换流
