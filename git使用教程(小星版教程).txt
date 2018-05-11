@@ -32,6 +32,18 @@ git checkout head file_path 撤销这个文件的提交（git commit）
 22.git fetch 或者 git remote prune origin 更新分支
 23.git checkout -b 新建分支名 --新建一个分支名
 
+---
+当git push 了代码，此时自己又返现push的代码不想push了想返回上一个版本 此时 我们可以进行如下操作
+git回退到上一个版本操作步骤:
+1. git log 找到回退版本号
+2.git reset --hard +<版本号>
+3.git push origin +<分支名
+会提示本地的版本落后于远端的版本； 
+为了覆盖掉远端的版本信息，使远端的仓库也回退到相应的版本，需要加上参数--force
+4.git push origin +<分知名> --force
+---
+
+
 对于经常使用Git的朋友来说，.gitignore配置一定不会陌生。废话不说多了，接下来就来说说这个.gitignore的使用。
 
 首先要强调一点，这个文件的完整文件名就是".gitignore"，注意最前面有个“.”。
