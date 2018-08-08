@@ -41,6 +41,56 @@ git回退到上一个版本操作步骤:
 会提示本地的版本落后于远端的版本； 
 为了覆盖掉远端的版本信息，使远端的仓库也回退到相应的版本，需要加上参数--force
 4.git push origin +<分知名> --force
+
+git reset --hard 之 git版本回退
+1.假设有2个提交记录
+
+commit def5adef853da4cc05752bdb36577c127be71ba5
+
+Author: 132982jianan <1072772483@qq.com>
+Date:   Thu Dec 28 16:01:36 2017 +0800
+
+
+
+    add data to 1.txt
+
+commit f36801544670e00b2f59a28e19017d2786c4085e
+Author: 132982jianan <1072772483@qq.com>
+Date:   Thu Dec 28 15:59:46 2017 +0800
+
+
+
+    init 1.txt
+(END)
+
+2.现在回到最开始的那一个提交
+git reset --hard f36801544670e00b2f59a28e19017d2786c4085e
+
+3.查看日志，就会发现只剩下一个提交了
+git log
+
+commit f36801544670e00b2f59a28e19017d2786c4085e
+Author: 132982jianan <1072772483@qq.com>
+Date:   Thu Dec 28 15:59:46 2017 +0800
+
+    init 1.txt
+(END)
+
+
+4.这个时候，发现回退版本错了，那么就用git reflog查看提交记录
+git reflog
+
+f368015 HEAD@{0}: reset: moving to f36801544670e00b2f59a28e19017d2786c4085e
+def5ade HEAD@{1}: reset: moving to def5ade
+f368015 HEAD@{2}: reset: moving to f36801544670e00b2f59a28e19017d2786c4085e
+def5ade HEAD@{3}: commit: add data to 1.txt
+f368015 HEAD@{4}: commit (initial): init 1.txt
+
+
+5.找出想要回退的版本，进行回退
+
+恢复
+git reset --hard def5ade
 ---
 
 
