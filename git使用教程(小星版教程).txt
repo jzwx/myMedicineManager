@@ -91,6 +91,8 @@ f368015 HEAD@{4}: commit (initial): init 1.txt
 
 恢复
 git reset --hard def5ade
+
+git的三种回滚方式 soft hard mixed
 ---
 
 
