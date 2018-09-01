@@ -32,6 +32,11 @@ git checkout head file_path 撤销这个文件的提交（git commit）
 22.git fetch 或者 git remote prune origin 更新分支
 23.git checkout -b 新建分支名 --新建一个分支名
 
+git checkout . #本地所有修改的。没有的提交的，都返回到原来的状态
+git stash #把所有没有提交的修改暂存到stash里面。可用git stash pop恢复
+git reset --hard HASH #返回到某个节点，不保留修改
+git reset --soft HASH #返回到某个节点。保留修改
+
 ---
 当git push 了代码，此时自己又返现push的代码不想push了想返回上一个版本 此时 我们可以进行如下操作
 git回退到上一个版本操作步骤:
