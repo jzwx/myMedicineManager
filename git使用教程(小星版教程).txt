@@ -173,3 +173,23 @@ Thumbs.db
 #.swp
 *.*~
 ~*.*
+
+#git cherry-pick 合并分支过程
+1.新建分支
+重构分支命名
+git checkout -b feature-0107(时间)-wx(姓名)
+
+修复bug分支命名
+git checkout -b hotfix-0328(时间)-wx(姓名)
+
+2.使用git cherry-pick 合并开发分支到测试环境
+git checkout 自己开发分支
+git add .
+git commit -m "规格管理重构"(需求名称)
+git push origin 自己开发分支
+git log (获取到自己提交的commitId)
+
+git checkout test(测试分支)
+git pull origin test(拉取测试分支代码)
+git cherry-pick 从自己开发分支获取到的自己当前提交的commitId (如果有冲突解决冲突代码，如果没有冲突push代码到测试分支)
+git push origin test 
