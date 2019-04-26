@@ -193,3 +193,7 @@ git checkout test(测试分支)
 git pull origin test(拉取测试分支代码)
 git cherry-pick 从自己开发分支获取到的自己当前提交的commitId (如果有冲突解决冲突代码，如果没有冲突push代码到测试分支)
 git push origin test 
+
+
+
+如果要取消这次cherry-pick,则使用git cherry-pick --abort，这种情况下当前分支恢复到cherry-pick前的状态，没有改变。
