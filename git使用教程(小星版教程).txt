@@ -29,6 +29,7 @@ git checkout head file_path 撤销这个文件的提交（git commit）
 19.git merge 分支 --合并分支
 20.git remote show origin --显示详细远程分支的流
 21.git branch -D wangxin_mr --删除分支(本地)
+   git push origin --delete wangxin_mr --删除分支(远程)
 22.git fetch 或者 git remote prune origin 更新分支
 23.git checkout -b 新建分支名 --新建一个分支名
 
