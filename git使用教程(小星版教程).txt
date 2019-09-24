@@ -195,6 +195,12 @@ git pull origin test(拉取测试分支代码)
 git cherry-pick 从自己开发分支获取到的自己当前提交的commitId (如果有冲突解决冲突代码，如果没有冲突push代码到测试分支)
 git push origin test 
 
+注意：当git cherry-pick commitId的过程中出现文件合并冲突问题时解决冲突并继续cherry-pick当前提交点的操作如下:
+步骤一:合并冲突文件
+步骤二:git add .
+步骤三:git cherry-pick --continue
+步骤四:git push oringin 需要合并到的分支
+（参考资料:https://www.jianshu.com/p/093ac6580cc6）
 
 
 如果要取消这次cherry-pick,则使用git cherry-pick --abort，这种情况下当前分支恢复到cherry-pick前的状态，没有改变。
