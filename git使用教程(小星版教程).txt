@@ -204,3 +204,6 @@ git push origin test
 
 
 如果要取消这次cherry-pick,则使用git cherry-pick --abort，这种情况下当前分支恢复到cherry-pick前的状态，没有改变。
+
+3.git commit -m 内容写错，重新编辑
+git commit --amend -m "新的提交信息"
