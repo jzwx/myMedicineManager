@@ -207,3 +207,7 @@ git push origin test
 
 3.git commit -m 内容写错，重新编辑
 git commit --amend -m "新的提交信息"
+
+对修改的文件查看修改的内容并进行对比
+git status #查新到修改的文件名，复制要查询修改内容并对比差异的文件名
+git diff 修改的文件名
