@@ -211,3 +211,40 @@ git commit --amend -m "新的提交信息"
 对修改的文件查看修改的内容并进行对比
 git status #查新到修改的文件名，复制要查询修改内容并对比差异的文件名
 git diff 修改的文件名
+
+git stash的使用场景：当前分支下的某几个文件在工作区正在被修改或者处于暂存区的某几个文件被工作区拿出来继续进行修改了，如果此时需要在当前文件下进行紧急修复bug，就需要把工作区正在修改的文件stash暂存起来，进行bug修复工作，在完成bug修复工作后，提交commit，将暂存的工作区文件内容拿出来继续工作。
+操作步骤以及指令
+1.将当前的工作现场隐藏起来
+git stash
+
+2.查看状态，是干净的
+git status 
+
+3.切换到主分支，从主分支上新建bug修复分支
+git checkout -b fixbug
+
+4.对文件进行修改提交并推送到仓库也可以不推送切换到主分支使用merge合并fixbug分支内容到主分支上，然后推送到主分支远程仓库中,最后删除fixbug分支
+git add .
+git commit -m "fix bug"
+git checkout master
+git merge --no-ff -m "merge bug fix"(提交备注) fixbug(分支名) 
+git push origin master
+git branch -d fixbug
+
+5.切换到最开始的开发分支，恢复之前存在stash暂存区的内容，继续之前的开发
+git checkout dev
+git status
+git stash list
+
+工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，可以使用如下2个方法：
+1.git stash apply恢复，恢复后，stash内容并不删除，你需要使用命令git stash drop来删除。
+
+2.另一种方式是使用git stash pop,恢复的同时把stash内容也删除了。
+
+6恢复stash暂存区内容后，查看之前修改的内容比对比一下修改内容信息
+git status
+git diff
+
+参考文档:
+https://mp.weixin.qq.com/s/exl0BGRx1smGo2_lN1x3QA
+https://blog.csdn.net/yao_94/article/details/88929992
