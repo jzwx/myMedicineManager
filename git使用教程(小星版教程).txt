@@ -266,7 +266,7 @@ git stash list
 #查看暂存区被修改的所有文件
 git stash show
 
-删除暂存区选定的队列(第一个暂存区)
+删除暂存区选定的队列(这里是第一个暂存区)
 git stash drop stash@{0}  
 
 参考文档:
