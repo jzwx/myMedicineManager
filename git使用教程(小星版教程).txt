@@ -266,8 +266,33 @@ git stash list
 #查看暂存区被修改的所有文件
 git stash show
 
-删除暂存区选定的队列(这里是第一个暂存区)
+#删除暂存区选定的队列(这里是第一个暂存区)
 git stash drop stash@{0}  
+
+
+
+
+
+撤销操作
+#撤销commit
+git reset --soft HEAD^
+
+#撤销add
+git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了 
+git reset HEAD XXX/XXX/XXX.java 就是对某个文件进行撤销了
+
+#撤销此次add，且未commit[常用]
+git reset HEAD~
+git reset HEAD filename // 撤销某个文件
+#撤销此次commit ，保留add[常用]
+git reset --soft HEAD~
+#撤销此次commit 和 add【常用】（不删除工作空间改动代码）
+git reset HEAD~
+or
+git reset --mixed HEAD~
+
+#撤销commit 和 add【慎用】（删除工作空间改动代码），代码会回滚到最新的一次git pull的代码
+git reset --hard HEAD~
 
 参考文档:
 https://mp.weixin.qq.com/s/exl0BGRx1smGo2_lN1x3QA
