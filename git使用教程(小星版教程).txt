@@ -297,3 +297,10 @@ git reset --hard HEAD~
 参考文档:
 https://mp.weixin.qq.com/s/exl0BGRx1smGo2_lN1x3QA
 https://blog.csdn.net/yao_94/article/details/88929992
+
+-------------------------------------------------------------------------------------------
+#清除git的全局设置指令
+#清空用户名
+git config --global --unset user.name "jzwx"
+#清空邮箱 
+git config --global --unset user.email "2058631403@qq.com"
