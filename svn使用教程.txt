@@ -1,1 +1,248 @@
+svn commit -m "优化提交" center/sys* games/game games/sys* */rolesys.lua  */pake.lua luaclib lualib lualib-src/ */main.lua  center/webhttp/ games/gameActor*
+
+190:
+oudadi@ubuntu:~/qtjj_server$ svn up
+oudadi@ubuntu:~/qtjj_server$ svn commit  -m "提交" lualib games center httpserver
+
+ymx:
+ubuntu@ip-172-31-15-117:~$ cd qd_server
+ubuntu@ip-172-31-15-117:~/qd_server$ svn up
+
+如果存在冲突，在控制台给出的选择中输入（接受当前改变）：tc     ，
+Select: (p) Postpone, (df) Show diff, (e) Edit file, (m) Merge,
+        (s) Show all options: s
+
+  (p)  - skip this conflict and leave it unresolved  [postpone]
+  (tf) - accept incoming version of entire file  [theirs-full]
+  (mf) - reject all incoming changes for this file  [mine-full]
+  (tc) - accept incoming changes only where they conflict  [theirs-conflict]
+  (mc) - reject incoming changes which conflict and accept the rest  [mine-conflict]
+  (r)  - accept the file as it appears in the working copy  [working]
+  (q)  - postpone all remaining conflicts
+  (e)  - change merged file in an editor  [edit]
+  (df) - show all changes made to merged file
+  (dc) - show all conflicts (ignoring merged version)
+  (m)  - use merge tool to resolve conflict
+  (l)  - launch external merge tool to resolve conflict  [launch]
+  (i)  - use built-in merge tool to resolve conflict
+  (s)  - show this list (also 'h', '?')
+Words in square brackets are the corresponding --accept option arguments.
+
+Select: (p) Postpone, (df) Show diff, (e) Edit file, (m) Merge,
+        (s) Show all options:   tc
+
+-- 一些警告选p
+Error validating server certificate for 'https://xx.xx.xx.xx:8443':
+ - The certificate is not issued by a trusted authority. Use the
+   fingerprint to validate the certificate manually!
+ - The certificate hostname does not match.
+Certificate information:
+ - Hostname: PC-201611201638
+ - Valid: from May 12 15:26:18 2017 GMT until May 10 15:26:18 2027 GMT
+ - Issuer: 
+ - Fingerprint: 68:8A:9B:C9:08:F3:9A:A9:C4:DC:F9:44:7C:B2:0D:6F:B0:5C:16:15
+(R)eject, accept (t)emporarily or accept (p)ermanently? 
+
+
+1、windows系统 svn的https的证书认证信息保存在： X(系统盘):\Users\#your usrname#\AppData\Roaming\Subversion\auth\svn.ssl.server 把这个svn.ssl.server文件夹直接删除。 
+2、然后会出现一个服务器证书的提示，根据提示输入 “p”，然后回车，问题就可以得到解决了。
+
+sudo apt-get update
+sudo apt-get install subversion
+svn checkout https://xx.xx.xx.xx/svn/small_server/
+
+ubuntu@ip-172-31-15-117:~/qd_server$ svn up
+ubuntu@ip-172-31-15-117:~/qd_server$ ./start_server center
+
+svn add --force center/syssyn* center/webhttp/cmd/sync.lua
+
+-- 项目中新建的文本和文件提交指令
+svn add --force lualib lualib-src/
+svn commit  -m "提交" lualib games center httpserver
+
+-- 拉取项目
+svn checkout https://127.0.0.1/family_project
+
+--编译项目
+第一步：
+sudo chmod -R 777 3rd/
+
+第二步：
+cd Lua-cURL
+make linux
+make install
+
+cd ..
+cd lua-zlib-master
+make linux
+make install
+
+第三步：
+cd family_project
+make linux
+
+cd ~/family_project
+./start_server center
+
+第四步：
+mv skynet cry_skynet
+vi start_server
+
+#!/bin/bash
+start_server=$1
+if [ "${start_server}" != "center" ] && [ "${start_server}" != "games" ] && [ "${start_server}" != "httpserver" ]; then
+    echo "please input:"
+    echo "  center"
+    echo "  games"
+    echo "  httpserver"
+    exit
+fi
+
+echo "open $start_server"
+
+#kill server
+while read line
+do
+    echo "kill -9 ${line}"
+    kill -9 $line
+    break
+done < "${start_server}.pid"
+sleep 1
+echo "./cry_skynet ${start_server}/config"
+./cry_skynet ${start_server}/config
+echo "open $start_server success"
+
+vi hotfix_center.sh
+
+svn commit -m "问题修复【1】" lualib games center httpserver
+
+svn 使用代码撤销提交
+# 查看最近10条记录
+svn log -l 10
+
+#反向合并，撤销 r156 的所有改动, -c -版本号 = 取消该版本的变更
+svn merge -c -156 .
+
+# 检查本地改动是否符合预期
+svn diff
+
+#提交回滚记录到服务器（备注清晰）
+svn commit -m "回滚r156：修复XX逻辑bug/误提交配置文件"
+
+
+报错 svn: E155015: Commit failed (details follow):
+svn: E155015: Aborting commit: '/home/oudadi/hoodle_server/center/sysusedata' remains in conflict
+
+
+方案 1：手动解决冲突（推荐，保留正确代码）
+# 查看冲突文件,冲突文件会标记 C
+svn status
+
+# 打开 sysusedata 文件，里面会有冲突标记：
+<<<<<<< .mine  本地你的修改
+...
+=======
+...
+>>>>>>> .rxxx 服务器版本
+
+#标记冲突已解决
+svn resolve --accept working center/sysusedata
+
+#正常提交
+svn commit -m "回滚提交"
+
+方案 2：直接放弃本地修改，用服务器版本覆盖
+svn resolve --accept theirs-full center/sysusedata
+svn commit -m "回滚提交"
+
+方案 3：放弃服务器更新，保留你本地的全部代码
+svn resolve --accept mine-full center/sysusedata
+svn commit -m "回滚提交"
+
+svn commit -m "优化提交" center/sys* games/game games/sys* */rolesys.lua  */pake.lua luaclib lualib lualib-src/ */main.lua  center/webhttp/ games/gameActor*
+
+svn commit -m "优化提交" center/sys* */pake.lua 
+
+svn commit -m "优化提交" center/sys* */pake.lua 
+
+Summary of conflicts:
+  Tree conflicts: 1
+Searching tree conflict details for 'httpserver' in repository:
+Checking r2893... done
+Tree conflict on 'httpserver':
+Directory updated from r2866 to r2937 was deleted by VisualSVN Server in r2893.
+A directory containing uncommitted changes was found in the working copy.
+Select: (p) Postpone, (r) Mark as resolved, (i) Ignore incoming deletion,
+        (a) Accept incoming deletion, (h) Help, (q) Quit resolution: i
+Tree conflict at 'httpserver' marked as resolved.
+Summary of conflicts:
+  Tree conflicts: 0 remaining (and 1 already resolved)
+oudadi@ubuntu:~/arrowmiss_server$ svn resolve --accept=theirs-full httpserver
+oudadi@ubuntu:~/arrowmiss_server$ svn up
+Updating '.':
+Authentication realm: <https://xx.xx.xx.xx:443> VisualSVN Server
+Password for 'oyj': ************
+
+At revision 2937.
+
+i
+svn resolve --accept=theirs-full httpserver
+
+oudadi@ubuntu:~/hoodle_server$ svn up
+Updating '.':
+Authentication realm: <https://xx.xx.xx.xx:443> VisualSVN Server
+Password for 'oyj': ************
+
+G    center/sysorder/cmd.lua
+U    center/pake.lua
+U    center/sysdisdata/dataactor/hall_data.lua
+U    center/sysdisdata/dataactor/games_data.lua
+U    center/sysdisdata/request.lua
+U    center/sysadv/actor.lua
+U    center/syslogin/actor.lua
+D    center/sysusedata
+   C center/sysusedata
+   A center/sysusedata/actor.lua
+   A center/sysusedata/cmd.lua
+   A center/sysusedata/request.lua
+U    games/game/hoodle/actor.lua
+U    games/gameActor2.lua
+Updated to revision 2959.
+Summary of conflicts:
+  Tree conflicts: 1
+Searching tree conflict details for 'center/sysusedata' in repository:
+Checking r2950... done
+Tree conflict on 'center/sysusedata':
+A new directory appeared during update to r2959; it was added by oyj in r2950.
+An unversioned directory was found in the working copy.
+Select: (p) Postpone, (r) Mark as resolved, (m) Merge the directories,
+        (h) Help, (q) Quit resolution: m
+
+冲突原因：
+1.服务器 r2950 有人（oyj）提交新增目录 center/sysusedata
+2.你本地工作副本已经存在同名文件夹，且不受 SVN 管理（unversioned）
+更新时两边目录撞名，产生目录树冲突。
+
+推荐操作步骤
+第一步：先选 m 尝试合并
+输入 m 回车
+作用：把服务器新增目录里的文件拉下来，和你本地未受控文件共存。
+如果合并成功：冲突自动消失，正常继续。
+
+ubuntu@VM-0-2-ubuntu:~/XXXX_server$ sudo svn up
+Updating '.':
+Error validating server certificate for 'https://127.0.0.1:443':
+ - The certificate is not issued by a trusted authority. Use the
+   fingerprint to validate the certificate manually!
+ - The certificate hostname does not match.
+Certificate information:
+ - Hostname: 122_27_16_32
+ - Valid: from Dec 18 06:59:50 2022 GMT until Dec 15 06:59:50 2032 GMT
+ - Issuer: 122_27_16_32
+ - Fingerprint: DB:45:71:54:2C:5C:E5:4E:7F:93:B0:77:E2:72:AA:F2:8A:E2:A6:85
+(R)eject, accept (t)emporarily or accept (p)ermanently? 
+
+选p
+
+
 
